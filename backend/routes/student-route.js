@@ -5,14 +5,14 @@ const Student = require('../models/Student')// import Model from Student.js;
 
 router.get('/', async (req, res) => { // app全换成router
   try {
-    const students = await Student.find().limit(20)
+    const students = await Student.find()
     res.send(students)
   } catch(err) {
     res.status(500).send(err)
     }
 })
 
-router.post('/', async (req, res) => {
+router.post('/', express.json(),async (req, res) => {
   try {
     const {studentID, studentName, studentEnrolDate} = req.body
 
@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.put('/update/:id', async (req, res) => {
+router.put('/update/:id', async (req, res,next) => {
 
   try {
     const {id} = req.params
@@ -48,7 +48,6 @@ router.put('/update/:id', async (req, res) => {
 
 router.delete('/all', async (req, res) => {
   try {
-    console.log('heeereee')
     await Student.deleteMany()
     res.send('all students removed')
   } catch(err) {
