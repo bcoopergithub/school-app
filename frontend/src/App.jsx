@@ -22,9 +22,13 @@ class App extends React.Component {     //  有render的必定是class componen
   
 
   async componentDidMount() {
-    console.log(process.env.REACT_APP_BACKEND_URL)
-    // const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/students")
-    // console.log(response)
+    try {
+      console.log(process.env.REACT_APP_BACKEND_URL)
+      const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/students")
+      console.log(response)
+    } catch(err) {
+      console.log(err.message)
+    }
     // const students = await response.json()
     // console.log(students)
     // this.setState({
