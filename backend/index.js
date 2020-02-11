@@ -24,6 +24,10 @@ app.use(cors({
   origin: process.env.CORS_URL
 }))
 
+// cors
+// what do i need to gitignore
+// where am i npm or yarn installing
+
 app.use('/students', require('./routes/student-route')) //连接index.js和routers,/students是routes的默认endpoint
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`)) 
