@@ -11,7 +11,7 @@ class App extends React.Component {     //  有render的必定是class componen
  
 
   handleStudentDelete = async(id, history) => {
-    await axios.delete(`http://localhost:5000/students/${id}`) // important
+    await axios.delete(process.env.REACT_APP_BACKEND_URL + `/students/${id}`) // important
     this.setState((prevState) => ({
       students: prevState.students.filter((student) => (id !== student._id))
     }) , () => {
@@ -22,7 +22,7 @@ class App extends React.Component {     //  有render的必定是class componen
   
 
   async componentDidMount() {
-    const response = await fetch("http://localhost:5000/students")
+    const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/students")
     const students = await response.json()
     this.setState({
       students
@@ -43,7 +43,7 @@ class App extends React.Component {     //  有render的必定是class componen
     <div className = "students-all">
   
       <div className = "navbar">
-        <a class = "active" href= "http://localhost:3000/">Home</a>
+        <a class = "active" href="/">Home</a>
         <a href="#Educator">Educator</a>
         <a href="#Student">Student</a>
         <a href="#about">About</a>
@@ -52,7 +52,7 @@ class App extends React.Component {     //  有render的必定是class componen
       <div className = "studentsaaa">
         {this.state.students ? <Router students = {this.state.students} handleStudentDelete ={this.handleStudentDelete}  /> : null}
         <div className = "createStudent">
-      <form action="http://localhost:3000/create">
+      <form action="/create">
     <input type="submit" value="Create a Student" />
 </form>
       </div>
@@ -65,5 +65,3 @@ class App extends React.Component {     //  有render的必定是class componen
 }
 
 export default App;
-// style = {this.paragraphStyles()}
-

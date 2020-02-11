@@ -6,7 +6,7 @@ class Student extends React.Component {     //  有render的必定是class comp
   state = { student : null }
 
   async componentDidMount() {
-    const student = await axios.get(`http://localhost:5000/students/${this.props.match.params.id}`)
+    const student = await axios.get(process.env.REACT_APP_BACKEND_URL + `/students/${this.props.match.params.id}`)
     this.setState({
       student : student.data
     })

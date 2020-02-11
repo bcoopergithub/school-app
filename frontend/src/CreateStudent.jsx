@@ -19,7 +19,7 @@ class CreateStudents extends React.Component {
       studentEnrolDate
     }
     try{
-      const response = await axios.post("http://localhost:5000/students", data)
+      const response = await axios.post(process.env.REACT_APP_BACKEND_URL + "/students", data)
       console.log(response.data)
     } catch(err){ 
       const errorArray = err.response.data
