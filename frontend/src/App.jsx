@@ -2,14 +2,16 @@ import React from 'react';
 import Router from './Router'
 import './global.css';
 import axios from 'axios';
-// import CreateStudent from './CreateStudent'
+import CreateStudent from './CreateStudent'
+
 
 class App extends React.Component {     //  有render的必定是class component
   
   state = { students : null }
  
+
   handleStudentDelete = async(id, history) => {
-    await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/students/${id}`) // important
+    await axios.delete(`http://localhost:5000/students/${id}`) // important
     this.setState((prevState) => ({
       students: prevState.students.filter((student) => (id !== student._id))
     }) , () => {
@@ -18,13 +20,16 @@ class App extends React.Component {     //  有render的必定是class componen
      )
   }
   
+
   async componentDidMount() {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/students`)
+    const response = await fetch("http://localhost:5000/students")
     const students = await response.json()
     this.setState({
       students
     })
   }
+  
+
   
   paragraphStyles = () => {
     return {
@@ -34,12 +39,11 @@ class App extends React.Component {     //  有render的必定是class componen
   }
 
   render() {
-    console.log(process.env.DREACT_APP_BACKEND_URL)
     return (  
     <div className = "students-all">
   
       <div className = "navbar">
-        <a className = "active" href= "http://localhost:3000/">Home</a>
+        <a class = "active" href= "http://localhost:3000/">Home</a>
         <a href="#Educator">Educator</a>
         <a href="#Student">Student</a>
         <a href="#about">About</a>
@@ -53,6 +57,8 @@ class App extends React.Component {     //  有render的必定是class componen
 </form>
       </div>
       </div>
+
+ 
     </div>
     )
   } // pass students as props
